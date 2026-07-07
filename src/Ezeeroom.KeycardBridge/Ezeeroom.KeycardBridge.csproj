@@ -7,11 +7,20 @@
     <AssemblyName>EzeeroomKeycardBridge</AssemblyName>
     <RootNamespace>Ezeeroom.KeycardBridge</RootNamespace>
     <Version>0.1.0</Version>
-    <!-- proRFL.dll is 32-bit; a 64-bit host fails with misleading "file not found"
-         errors (see docs/KEYCARD_IMPLEMENTATION_GUIDE.md §1.1). -->
-    <PlatformTarget>x86</PlatformTarget>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- Lets `dotnet run` work on dev machines that only have a newer runtime installed
+         (e.g. .NET 10) without the exact 8.0 runtime. No effect on the real deployment,
+         which is published self-contained (bundles its own runtime) — see build/publish.ps1. -->
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+
+  <!-- proRFL.dll is 32-bit; a 64-bit host fails with misleading "file not found" errors
+       (see docs/KEYCARD_IMPLEMENTATION_GUIDE.md §1.1). Only force x86 when actually
+       publishing for win-x86 (build/publish.ps1) — forcing it unconditionally breaks
+       `dotnet run` on non-x86 dev machines (e.g. Apple Silicon can't run x86 at all). -->
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x86'">
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>

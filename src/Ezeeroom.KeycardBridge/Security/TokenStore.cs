@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Ezeeroom.KeycardBridge.Config;
 
 namespace Ezeeroom.KeycardBridge.Security;
 
@@ -19,9 +20,7 @@ public static class TokenStore
 {
     private static readonly byte[] Entropy = Encoding.UTF8.GetBytes("ezeeroom-keycard-bridge/v1");
 
-    private static string TokenPath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
-        "EzeeroomKeycardBridge", "token.bin");
+    private static string TokenPath => Path.Combine(AppPaths.DataDirectory, "token.bin");
 
     public static void Save(string token)
     {

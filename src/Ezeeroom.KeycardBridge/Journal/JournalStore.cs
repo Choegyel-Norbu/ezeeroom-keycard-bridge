@@ -19,9 +19,7 @@ public sealed class JournalStore
         var path = options.Value.JournalPath;
         if (string.IsNullOrWhiteSpace(path))
         {
-            var dir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
-                "EzeeroomKeycardBridge");
+            var dir = AppPaths.DataDirectory;
             Directory.CreateDirectory(dir);
             path = Path.Combine(dir, "journal.db");
         }
