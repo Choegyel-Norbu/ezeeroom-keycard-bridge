@@ -9,6 +9,10 @@ on:
   push:
     tags: ["v*"]
 
+# Required for the release step: the default GITHUB_TOKEN is read-only on new repos.
+permissions:
+  contents: write
+
 jobs:
   installer:
     runs-on: windows-latest
