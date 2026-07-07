@@ -1,0 +1,17 @@
+# .NET
+bin/
+obj/
+publish/
+*.user
+.vs/
+
+# Installer output
+installer/output/
+
+# Local runtime artifacts (never commit journals or tokens)
+*.db
+*.db-*
+token.bin
+
+# OS
+.DS_Store
