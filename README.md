@@ -85,7 +85,14 @@ The shared token is NOT in config — it is DPAPI-protected (machine scope):
 
 ## Build the Windows installer
 
-On a Windows machine with the .NET 8 SDK and [Inno Setup 6](https://jrsoftware.org/isinfo.php):
+**No Windows machine? Use CI.** The `build-installer` GitHub Actions workflow builds the
+setup.exe on a hosted Windows runner: Actions → *build-installer* → *Run workflow*, then
+download the `ezeeroom-keycard-bridge-setup` artifact. Pushing a tag like `v0.1.0`
+attaches the exe to a GitHub Release instead. The installer is fully self-contained —
+the target front-desk PC needs nothing pre-installed (the .NET runtime is bundled).
+
+To build locally instead, on a Windows machine with the .NET 8 SDK and
+[Inno Setup 6](https://jrsoftware.org/isinfo.php):
 
 ```powershell
 .\build\publish.ps1                      # self-contained win-x86 publish
